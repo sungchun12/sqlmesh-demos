@@ -5,8 +5,8 @@ MODEL (
   ),
   columns (
     org_id INT,
-    event_timestamp timestamp,
-    activity VARCHAR
+    event_timestamp TIMESTAMP,
+    activity TEXT
   ),
   grain (org_id, event_timestamp, activity)
 )

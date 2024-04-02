@@ -6,10 +6,12 @@ MODEL (
   columns (
     org_id INT,
     event_timestamp TIMESTAMP,
-    activity VARCHAR,
-    plan VARCHAR,
+    activity TEXT,
+    plan TEXT,
     price INT,
-    deployment VARCHAR
+    deployment TEXT
   ),
-  grain (org_id)
+  grain (
+    org_id
+  )
 )

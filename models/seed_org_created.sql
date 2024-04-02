@@ -5,10 +5,12 @@ MODEL (
   ),
   columns (
     org_id INT,
-    org_name VARCHAR,
-    domain VARCHAR,
-    employee_range VARCHAR,
-    created_at timestamp
+    org_name TEXT,
+    domain TEXT,
+    employee_range TEXT,
+    created_at TIMESTAMP
   ),
-  grain (org_id)
+  grain (
+    org_id
+  )
 )

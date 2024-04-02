@@ -6,11 +6,13 @@ MODEL (
   columns (
     user_id INT,
     org_id INT,
-    first_name VARCHAR,
-    last_name VARCHAR,
-    email VARCHAR,
+    first_name TEXT,
+    last_name TEXT,
+    email TEXT,
     is_first_user BOOLEAN,
-    created_at timestamp,
+    created_at TIMESTAMP
   ),
-  grain (user_id)
+  grain (
+    user_id
+  )
 )
