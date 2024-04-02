@@ -25,7 +25,7 @@ order_payments as (
 
     select
         order_id,
-        @EACH(['credit_card', 'coupon', 'bank_transfer', 'gift_card'], payment_method -> sum(case when payment_method = payment_method then amount else 0 end) as @{payment_method}_amount),
+        @EACH(['credit_card', 'coupon', 'bank_transfer', 'gift_card'], x -> sum(case when payment_method = x then amount else 0 end) as @{x}_amount),
         sum(amount) as total_amount
 
     from payments
@@ -41,7 +41,7 @@ final as (
         orders.customer_id,
         orders.order_date,
         orders.status,
-        @EACH(['credit_card', 'coupon', 'bank_transfer', 'gift_card'], payment_method -> order_payments.@{payment_method}_amount),
+        @EACH(['credit_card', 'coupon', 'bank_transfer', 'gift_card'], x -> order_payments.@{x}_amount),
         order_payments.total_amount as amount
 
     from orders
