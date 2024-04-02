@@ -1,25 +1,20 @@
-with source as (
-    
-    {#-
-    Normally we would select from the table here, but we are using seeds to load
-    our data in this project
-    #}
-    select * from {{ ref('raw_payments') }}
+MODEL (
+  name demo.stg_payments,
+  cron '@daily',
+  grain payment_id,
+  audits (UNIQUE_VALUES(columns = (
+    payment_id
+  )), NOT_NULL(columns = (
+    payment_id
+  )))
+);
 
-),
 
-renamed as (
 
-    select
-        id as payment_id,
-        order_id,
-        payment_method,
+select
+    id as payment_id,
+    order_id,
+    payment_method,
+    amount / 100 as amount --`amount` is currently stored in cents, so we convert it to dollars
 
-        -- `amount` is currently stored in cents, so we convert it to dollars
-        amount / 100 as amount
-
-    from source
-
-)
-
-select * from renamed
+from demo.seed_raw_payments

@@ -1,18 +1,29 @@
+MODEL (
+  name demo.customers,
+  cron '@daily',
+  grain customer_id,
+  audits (UNIQUE_VALUES(columns = (
+    customer_id
+  )), NOT_NULL(columns = (
+    customer_id
+  )))
+);
+
 with customers as (
 
-    select * from {{ ref('stg_customers') }}
+    select * from demo.stg_customers
 
 ),
 
 orders as (
 
-    select * from {{ ref('stg_orders') }}
+    select * from demo.stg_orders
 
 ),
 
 payments as (
 
-    select * from {{ ref('stg_payments') }}
+    select * from demo.stg_payments
 
 ),
 

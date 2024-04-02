@@ -1,7 +1,7 @@
 MODEL (
   name demo.seed_raw_orders,
   kind SEED (
-    path '../../seeds/raw_orders.csv'
+    path '../seeds/raw_orders.csv'
   ),
   columns (
     id INT,

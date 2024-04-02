@@ -1,23 +1,19 @@
-with source as (
+MODEL (
+  name demo.stg_orders,
+  cron '@daily',
+  grain order_id,
+  audits (UNIQUE_VALUES(columns = (
+    order_id
+  )), NOT_NULL(columns = (
+    order_id
+  )))
+);
 
-    {#-
-    Normally we would select from the table here, but we are using seeds to load
-    our data in this project
-    #}
-    select * from {{ ref('raw_orders') }}
 
-),
+select
+    id as order_id,
+    user_id as customer_id,
+    order_date,
+    status
 
-renamed as (
-
-    select
-        id as order_id,
-        user_id as customer_id,
-        order_date,
-        status
-
-    from source
-
-)
-
-select * from renamed
+from demo.seed_raw_orders
