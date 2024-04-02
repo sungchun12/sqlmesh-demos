@@ -1,5 +1,5 @@
 MODEL (
-  name sqlmesh_example.incremental_model,
+  name demo.incremental_model,
   kind INCREMENTAL_BY_TIME_RANGE (
     time_column event_date
   ),
@@ -12,6 +12,6 @@ SELECT
   id,
   item_id,
   event_date
-FROM sqlmesh_example.seed_model
+FROM demo.seed_model
 WHERE
   event_date BETWEEN @start_date AND @end_date
