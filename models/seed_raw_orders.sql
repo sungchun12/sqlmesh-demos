@@ -7,7 +7,7 @@ MODEL (
     id INT,
     user_id INT,
     order_date DATE,
-    status VARCHAR(50)
+    status TEXT(50)
   ),
   grain (id, user_id)
 )

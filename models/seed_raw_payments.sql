@@ -6,7 +6,7 @@ MODEL (
   columns (
     id INT,
     order_id INT,
-    payment_method VARCHAR(50),
+    payment_method TEXT(50),
     amount INT
   ),
   grain (id, user_id)

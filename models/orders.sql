@@ -9,47 +9,40 @@ MODEL (
   )))
 );
 
-with orders as (
-
-    select * from demo.stg_orders
-
-),
-
-payments as (
-
-    select * from demo.stg_payments
-
-),
-
-order_payments as (
-
-    select
-        order_id,
-        @EACH(['credit_card', 'coupon', 'bank_transfer', 'gift_card'], x -> sum(case when payment_method = x then amount else 0 end) as @{x}_amount),
-        sum(amount) as total_amount
-
-    from payments
-
-    group by order_id
-
-),
-
-final as (
-
-    select
-        orders.order_id,
-        orders.customer_id,
-        orders.order_date,
-        orders.status,
-        @EACH(['credit_card', 'coupon', 'bank_transfer', 'gift_card'], x -> order_payments.@{x}_amount),
-        order_payments.total_amount as amount
-
-    from orders
-
-
-    left join order_payments
-        on orders.order_id = order_payments.order_id
-
+WITH orders AS (
+  SELECT
+    *
+  FROM demo.stg_orders
+), payments AS (
+  SELECT
+    *
+  FROM demo.stg_payments
+), order_payments AS (
+  SELECT
+    order_id,
+    @EACH(
+      ['credit_card', 'coupon', 'bank_transfer', 'gift_card'],
+      x -> SUM(CASE WHEN payment_method = x THEN amount ELSE 0 END) AS @{x}_amount
+    ),
+    SUM(amount) AS total_amount
+  FROM payments
+  GROUP BY
+    order_id
+), final AS (
+  SELECT
+    orders.order_id,
+    orders.customer_id,
+    orders.order_date,
+    orders.status,
+    @EACH(
+      ['credit_card', 'coupon', 'bank_transfer', 'gift_card'],
+      x -> order_payments.@{x}_amount
+    ),
+    order_payments.total_amount AS amount
+  FROM orders
+  LEFT JOIN order_payments
+    ON orders.order_id = order_payments.order_id
 )
-
-select * from final
+SELECT
+  *
+FROM final

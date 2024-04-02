@@ -5,8 +5,10 @@ MODEL (
   ),
   columns (
     id INT,
-    first_name VARCHAR(50),
-    last_name VARCHAR(50)
+    first_name TEXT(50),
+    last_name TEXT(50)
   ),
-  grain (id)
+  grain (
+    id
+  )
 )

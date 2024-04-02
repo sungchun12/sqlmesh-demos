@@ -9,11 +9,9 @@ MODEL (
   )))
 );
 
-
-select
-    id as order_id,
-    user_id as customer_id,
-    order_date,
-    status
-
-from demo.seed_raw_orders
+SELECT
+  id AS order_id,
+  user_id AS customer_id,
+  order_date,
+  status
+FROM demo.seed_raw_orders

@@ -9,9 +9,8 @@ MODEL (
   )))
 );
 
-select
-    id as customer_id,
-    first_name,
-    last_name
-
-from demo.seed_raw_customers
+SELECT
+  id AS customer_id,
+  first_name,
+  last_name
+FROM demo.seed_raw_customers
