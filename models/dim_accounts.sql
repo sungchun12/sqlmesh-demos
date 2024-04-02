@@ -2,6 +2,10 @@ MODEL (
   name demo.dim_accounts,
   cron '@daily',
   grain org_id,
+  audits (
+    unique_values(columns=(org_id)),
+    not_null(columns=(org_id))
+  )
 );
 
 

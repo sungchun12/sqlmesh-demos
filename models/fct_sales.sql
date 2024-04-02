@@ -2,6 +2,10 @@ MODEL (
   name demo.fct_sales,
   cron '@daily',
   grain date_month,
+  audits (
+    unique_values(columns=(date_month)),
+    not_null(columns=(date_month))
+  )
 );
 
 -- TODO: update this to feel like an actual fact table at the lowest grain
