@@ -3,7 +3,13 @@ gateways:
         connection:
             type: duckdb
             database: db.db
-
+        state_connection:
+            type: postgres
+            host: {{ env_var('SQLMESH_STATE_HOST') }}
+            port: 5432
+            user: {{ env_var('SQLMESH_STATE_USERNAME') }}
+            password: {{ env_var('SQLMESH_STATE_PASSWORD') }}
+            database: sqlmesh_state
 default_gateway: local
 
 model_defaults:
