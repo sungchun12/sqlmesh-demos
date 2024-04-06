@@ -9,6 +9,8 @@ MODEL (
   )))
 );
 
+@DEF(payment_methods, ['credit_card', 'coupon', 'bank_transfer', 'gift_card']);
+
 WITH orders AS (
   SELECT
     *
@@ -21,7 +23,7 @@ WITH orders AS (
   SELECT
     order_id,
     @EACH(
-      ['credit_card', 'coupon', 'bank_transfer', 'gift_card'],
+      @payment_methods,
       x -> SUM(CASE WHEN payment_method = x THEN amount ELSE 0 END) AS @{x}_amount
     ),
     SUM(amount) AS total_amount
@@ -35,7 +37,7 @@ WITH orders AS (
     orders.order_date,
     orders.status,
     @EACH(
-      ['credit_card', 'coupon', 'bank_transfer', 'gift_card'],
+      @payment_methods,
       x -> order_payments.@{x}_amount
     ),
     order_payments.total_amount AS amount
