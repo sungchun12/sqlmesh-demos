@@ -35,3 +35,7 @@ jobs:
       - name: Run CI/CD Bot
         run: |
           sqlmesh_cicd -p ${{ github.workspace }} github --token ${{ secrets.GITHUB_TOKEN }} run-all
+        env: # TODO: update your GitHub secrets to include SNOWFLAKE_ACCOUNT, SNOWFLAKE_USER, SNOWFLAKE_PASSWORD, SNOWFLAKE_ROLE
+          SQLMESH_STATE_HOST: ${{ secrets.SQLMESH_STATE_HOST }}
+          SQLMESH_STATE_USERNAME: ${{ secrets.SQLMESH_STATE_USERNAME }}
+          SQLMESH_STATE_PASSWORD: ${{ secrets.SQLMESH_STATE_PASSWORD }}
