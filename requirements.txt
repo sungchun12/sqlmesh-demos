@@ -1,1 +1,1 @@
-sqlmesh[web]==0.82.3
+sqlmesh[web,postgres,github]==0.82.3
