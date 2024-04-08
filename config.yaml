@@ -3,14 +3,24 @@ gateways:
         connection:
             type: duckdb
             database: db.db
+
+    bigquery:
+        connection:
+            concurrent_tasks: 24
+            register_comments: true
+            type: bigquery
+            method: service-account
+            keyfile: service-account.json
+            project: sqlmesh-demo
         state_connection:
             type: postgres
             host: {{ env_var('SQLMESH_STATE_HOST') }}
             port: 5432
             user: {{ env_var('SQLMESH_STATE_USERNAME') }}
             password: {{ env_var('SQLMESH_STATE_PASSWORD') }}
-            database: sqlmesh_state
-default_gateway: local
+            database: sqlmesh_state_demo
+
+default_gateway: bigquery
 
 model_defaults:
-    dialect: duckdb
+    dialect: bigquery
