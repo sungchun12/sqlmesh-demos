@@ -11,8 +11,8 @@ gateways:
             concurrent_tasks: 24
             register_comments: true
             type: bigquery
-            method: service-account
-            keyfile: service-account.json
+            method: service-account-json
+            keyfile_json: {{ env_var('GOOGLE_CREDENTIALS') }}
             project: sqlmesh-demo
         state_connection:
             type: postgres
