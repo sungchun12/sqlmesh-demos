@@ -31,10 +31,16 @@ model_defaults:
 cicd_bot:
     type: github
     merge_method: squash
+    enable_deploy_command: true
+    auto_categorize_changes:
+      external: full
+      python: full
+      sql: full
+      seed: full
 
-# list of users that are allowed to approve PRs
-users:
-- username: sung_sqlmesh
-  github_username: sungchun12
-  roles:
-    - required_approver
+# list of users that are allowed to approve PRs for synchronized deployments
+# users:
+# - username: sung_sqlmesh
+#   github_username: sungchun12
+#   roles:
+#     - required_approver
