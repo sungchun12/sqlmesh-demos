@@ -1,9 +1,11 @@
 gateways:
+    # use this for local development and tryingout SQLMesh
     local:
         connection:
             type: duckdb
             database: db.db
 
+    # use this for a realistic project
     bigquery:
         connection:
             concurrent_tasks: 24
@@ -24,3 +26,15 @@ default_gateway: bigquery
 
 model_defaults:
     dialect: bigquery
+
+# enables synchronized deployments to prod when a PR is merged
+cicd_bot:
+    type: github
+    merge_method: squash
+
+# list of users that are allowed to approve PRs
+users:
+- username: sung_sqlmesh
+  github_username: sungchun12
+  roles:
+    - required_approver
