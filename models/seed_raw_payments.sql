@@ -4,10 +4,10 @@ MODEL (
     path '../seeds/raw_payments.csv'
   ),
   columns (
-    id INT,
-    order_id INT,
-    payment_method TEXT(50),
-    amount INT
+    id INT64,
+    order_id INT64,
+    payment_method STRING(50),
+    amount INT64
   ),
   grain (id, user_id)
 )

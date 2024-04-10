@@ -36,10 +36,7 @@ WITH orders AS (
     orders.customer_id,
     orders.order_date,
     orders.status,
-    @EACH(
-      @payment_methods,
-      x -> order_payments.@{x}_amount
-    ),
+    @EACH(@payment_methods, x -> order_payments.@{x}_amount),
     order_payments.total_amount AS amount
   FROM orders
   LEFT JOIN order_payments

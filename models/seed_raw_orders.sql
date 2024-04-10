@@ -4,10 +4,10 @@ MODEL (
     path '../seeds/raw_orders.csv'
   ),
   columns (
-    id INT,
-    user_id INT,
+    id INT64,
+    user_id INT64,
     order_date DATE,
-    status TEXT(50)
+    status STRING(50)
   ),
   grain (id, user_id)
 )
