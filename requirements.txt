@@ -1,1 +1,2 @@
 sqlmesh[web,postgres,github,bigquery]==0.84.0
+pytest==8.1.1

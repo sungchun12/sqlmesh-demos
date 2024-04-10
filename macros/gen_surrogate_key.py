@@ -1,10 +1,10 @@
 """a SQLMesh python macro that generates a surrogate key based on the fields provided"""
 
 from sqlglot import exp
-from sqlmesh.core.macros import macro
+from sqlmesh import macro
 
-# @macro
-def generate_surrogate_key(field_list: list):
+@macro("gen_surrogate_key")
+def gen_surrogate_key(evaluator, field_list: list):
     """
     Generates a surrogate key by concatenating provided fields,
     treating null values with a specific placeholder,
@@ -15,6 +15,10 @@ def generate_surrogate_key(field_list: list):
     
     Returns: An expression (SQLGlot) representing the SQL expression for the generated surrogate key.
     """
+
+    # Convert field_list to a list if it's not one already
+    if not isinstance(field_list, list):
+        field_list = list(field_list)
 
     default_null_value = "_sqlmesh_surrogate_key_null_default_"
 
@@ -32,5 +36,3 @@ def generate_surrogate_key(field_list: list):
     hash_exp = exp.SHA2(this=concat_exp, length=exp.Literal.number(256))
 
     return hash_exp
-
-# print(generate_surrogate_key(["field1","aiowjef"]).sql())  # Output: SHA2(CONCAT(COALESCE(CAST(field1 AS TEXT), '_sqlmesh_surrogate_key_null_default_'), '-', COALESCE(CAST(aiowjef AS TEXT), '_sqlmesh_surrogate_key_null_default_')), 256)
