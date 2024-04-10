@@ -4,9 +4,9 @@ MODEL (
     path '../seeds/raw_customers.csv'
   ),
   columns (
-    id INT,
-    first_name TEXT(50),
-    last_name TEXT(50)
+    id INT64,
+    first_name STRING(50),
+    last_name STRING(50)
   ),
   grain (
     id

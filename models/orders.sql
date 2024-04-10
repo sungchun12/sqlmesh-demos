@@ -3,9 +3,9 @@ MODEL (
   cron '@daily',
   grain order_id,
   audits (UNIQUE_VALUES(columns = (
-    order_id
+    surrogate_key
   )), NOT_NULL(columns = (
-    order_id
+    surrogate_key
   )))
 );
 
@@ -32,14 +32,12 @@ WITH orders AS (
     order_id
 ), final AS (
   SELECT
+    @gen_surrogate_key([orders.order_id, orders.customer_id]) as surrogate_key,
     orders.order_id,
     orders.customer_id,
     orders.order_date,
     orders.status,
-    @EACH(
-      @payment_methods,
-      x -> order_payments.@{x}_amount
-    ),
+    @EACH(@payment_methods, x -> order_payments.@{x}_amount),
     order_payments.total_amount AS amount
   FROM orders
   LEFT JOIN order_payments
