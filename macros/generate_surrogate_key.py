@@ -18,31 +18,28 @@ def generate_surrogate_key(field_list: list, hash_function='SHA256'):
 
     default_null_value = "_sqlmesh_surrogate_key_null_default_"
 
-    expressions = [
-        exp.Column(this="column1"),
-        exp.Column(this="column2"),
-        exp.cast(expression=exp.Column(this="column3"), to='TEXT'),
-        exp.Coalesce(this=exp.cast(expression=exp.Column(this="column3"), to='TEXT'), expressions=exp.Literal.string(default_null_value)),
-    ]
-    print(expressions[2])
-    print(expressions[3].sql())
-    x
+    # expressions = [
+    #     exp.Column(this="column1"),
+    #     exp.Column(this="column2"),
+    #     exp.cast(expression=exp.Column(this="column3"), to='TEXT'),
+    #     exp.Coalesce(this=exp.cast(expression=exp.Column(this="column3"), to='TEXT'), expressions=exp.Literal.string(default_null_value)),
+    # ]
+    # print(expressions[2])
+    # print(expressions[3].sql())
 
     expressions = []
     for i, field in enumerate(field_list):
         coalesce_expression = exp.Coalesce(
-            args=[
-                exp.Cast(arg=exp.Column(this=field), to=exp.DataType.Type.TEXT),
-                exp.Literal.string(default_null_value)
-            ]
+                this=exp.cast(expression=exp.Column(this=field), to='TEXT'),
+                expressions=exp.Literal.string(default_null_value)
         )
         expressions.append(coalesce_expression)
         if i < len(field_list) - 1:  # Add separator except for the last element
             expressions.append(exp.Literal.string('-'))
 
-    print(f"expressions: {expressions[0][0].sql()}")
-    # Generating CONCAT expression
-    concat_exp = exp.Concat(args=expressions)
+    concat_exp = exp.Concat(expressions=expressions)
+
+    print(f"concat_exp: {concat_exp}")
 
     # print(f"concat_exp: {concat_exp}")
     # x
