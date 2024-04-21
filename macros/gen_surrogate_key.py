@@ -12,6 +12,10 @@ def gen_surrogate_key(evaluator, field_list: list):
 
     Args:
     - field_list: List of field names to be included in the surrogate key.
+
+    Example:
+    - gen_surrogate_key(["field1", "field2"])
+    - select @gen_surrogate_key([orders.order_id, orders.customer_id]) as surrogate_key from orders
     
     Returns: An expression (SQLGlot) representing the SQL expression for the generated surrogate key.
     """
