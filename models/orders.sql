@@ -32,7 +32,7 @@ WITH orders AS (
     order_id
 ), final AS (
   SELECT
-    @gen_surrogate_key([orders.order_id, orders.customer_id]) as surrogate_key, --custom macro example
+    @gen_surrogate_key([orders.order_id, orders.customer_id]) AS surrogate_key, /* custom macro example */
     orders.order_id,
     orders.customer_id,
     orders.order_date,

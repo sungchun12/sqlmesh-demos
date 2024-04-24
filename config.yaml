@@ -38,6 +38,9 @@ cicd_bot:
       sql: full
       seed: full
 
+plan:
+  enable_preview: true
+
 # list of users that are allowed to approve PRs for synchronized deployments
 # users:
 # - username: sung_sqlmesh
