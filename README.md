@@ -18,5 +18,4 @@ Context: You're tasked with a...
 
 ### Credits
 
-Portions of this project are modifications based on work created and shared by dbt Labs and used according to terms described in the Apache License, Version 2.0. For the original work and its license, see:
-https://github.com/dbt-labs/jaffle_shop_duckdb/license
+Portions of this project are modifications based on work created and shared by dbt Labs and used according to terms described in the Apache License, Version 2.0. For the original work and its license, see: [here](https://github.com/dbt-labs/jaffle_shop_duckdb?tab=Apache-2.0-1-ov-file#readme)
