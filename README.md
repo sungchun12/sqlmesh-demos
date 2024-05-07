@@ -10,6 +10,7 @@ This repo is going to try something a bit novel compared to your standard demo p
 
 This is intentionally similar to what people may have experienced when I created this github repo at dbt Labs: [here](https://github.com/dbt-labs/jaffle_shop_duckdb)
 
+
 ## Basic Setup
 
 What you'll be using:
@@ -21,6 +22,7 @@ What you'll be using:
 - SQLGlot: Python macros that compile to SQL
 - pytest: test Python macros
 
+<details>
 **Setup your virtual environment for SQLMesh:**
 
 ```bash
@@ -73,6 +75,8 @@ Data warehouse connection succeeded
 State backend connection succeeded
 Test connection succeeded
 ```
+
+</details>
 
 ## Story #1
 
