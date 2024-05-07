@@ -61,7 +61,7 @@ export SQLMESH_STATE_PASSWORD=<your-password-blurred-in-the-image>
 
 4. Click on the Pooled connection box ✔️ to increase concurrent connection limits
 
-Verify SQLMesh can connect to BigQuery and Postgres:
+**Verify SQLMesh can connect to BigQuery and Postgres:**
 
 ```bash
 sqlmesh info # print info about a SQLMesh project
