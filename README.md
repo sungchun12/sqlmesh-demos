@@ -21,7 +21,7 @@ What you'll be using:
 - SQLGlot: Python macros that compile to SQL
 - pytest: test Python macros
 
-Setup your virtual environment for SQLMesh:
+**Setup your virtual environment for SQLMesh:**
 
 ```bash
 git clone https://github.com/sungchun12/sqlmesh-demos.git # clone the repo
@@ -32,7 +32,7 @@ pip install -r requirements.txt # install dependencies
 source venv/bin/activate # reactivate virtual environment
 ```
 
-Setup your BigQuery Service Account:
+**Setup your BigQuery Service Account:**
 
 ![service_account](./images/bigquery_service_account.png)
 
@@ -44,7 +44,7 @@ Setup your BigQuery Service Account:
 
 `export GOOGLE_CREDENTIALS=<your-service-account-key-contents>`
 
-Setup your Postgres Database:
+**Setup your Postgres Database:**
 
 1. Sign up for a free Neon account: [here](https://neon.tech/)
 2. Create a new database named: `sqlmesh_state_demo`
@@ -59,7 +59,7 @@ export SQLMESH_STATE_USERNAME=<your-neon-username>
 export SQLMESH_STATE_PASSWORD=<your-password-blurred-in-the-image>
 ```
 
-4. Click on the Pooled connection box :checkmark: to increase concurrent connection limits
+4. Click on the Pooled connection box ✔️ to increase concurrent connection limits
 
 Verify SQLMesh can connect to BigQuery and Postgres:
 
