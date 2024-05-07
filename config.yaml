@@ -1,10 +1,4 @@
 gateways:
-    # use this for local development and tryingout SQLMesh
-    local:
-        connection:
-            type: duckdb
-            database: db.db
-
     # use this for a realistic project
     bigquery:
         connection:
@@ -21,6 +15,12 @@ gateways:
             user: {{ env_var('SQLMESH_STATE_USERNAME') }}
             password: {{ env_var('SQLMESH_STATE_PASSWORD') }}
             database: sqlmesh_state_demo
+
+    # use this for local development and trying out SQLMesh
+    # local:
+    #     connection:
+    #         type: duckdb
+    #         database: sqlmesh-demo.db
 
 default_gateway: bigquery
 
@@ -42,8 +42,8 @@ plan:
   enable_preview: true
 
 # list of users that are allowed to approve PRs for synchronized deployments
-# users:
-# - username: sung_sqlmesh
-#   github_username: sungchun12
-#   roles:
-#     - required_approver
+users:
+- username: sung_sqlmesh
+  github_username: sungchun12
+  roles:
+    - required_approver
