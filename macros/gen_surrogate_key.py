@@ -15,9 +15,9 @@ def gen_surrogate_key(evaluator, field_list: list) -> exp.SHA2:
 
     Example:
     - gen_surrogate_key(["field1", "field2"])
-    - select @gen_surrogate_key([orders.order_id, orders.customer_id]) as surrogate_key from orders
+    - In a SQL model: select @gen_surrogate_key([orders.order_id, orders.customer_id]) as surrogate_key from orders
     
-    Returns: An expression (SQLGlot) representing the SQL expression for the generated surrogate key.
+    Returns: An expression (SQLGlot) representing the SQL for the generated surrogate key.
     """
 
     default_null_value = "_sqlmesh_surrogate_key_null_default_"
