@@ -23,6 +23,7 @@ What you'll be using:
 - pytest: test Python macros
 
 <details>
+
 **Setup your virtual environment for SQLMesh:**
 
 ```bash
