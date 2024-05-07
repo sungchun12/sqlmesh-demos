@@ -57,12 +57,10 @@ source venv/bin/activate # reactivate virtual environment
 
 ```bash
 # examples based on the image above
-export SQLMESH_STATE_HOST=ep-purple-heart-a6mqlep8-pooler.us-west-2.aws.neon.tech
+export SQLMESH_STATE_HOST=ep-purple-heart-a6mqlep8.us-west-2.aws.neon.tech
 export SQLMESH_STATE_USERNAME=<your-neon-username>
 export SQLMESH_STATE_PASSWORD=<your-password-blurred-in-the-image>
 ```
-
-4. Click on the Pooled connection box ✔️ to increase concurrent connection limits
 
 **Verify SQLMesh can connect to BigQuery and Postgres:**
 
