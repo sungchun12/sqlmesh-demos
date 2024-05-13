@@ -43,7 +43,7 @@ plan:
 
 # list of users that are allowed to approve PRs for synchronized deployments
 users:
-- username: sung_sqlmesh
+- username: sung_sqlmesh_demo
   github_username: sungchun12
   roles:
     - required_approver
