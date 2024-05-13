@@ -7,15 +7,15 @@ on:
     - synchronize
     - opened
   # Required if using comments to issue commands to the bot
-  issue_comment:
-    types:
-    - created
-  # Required if using required approvers to automate deployments
-  # pull_request_review:
+  # issue_comment:
   #   types:
-  #   - edited
-  #   - submitted
-  #   - dismissed
+  #   - created
+  # Required if using required approvers to automate deployments
+  pull_request_review:
+    types:
+    - edited
+    - submitted
+    - dismissed
 
 # The latest commit is the one that will be used to create the PR environment and deploy to production
 concurrency:
