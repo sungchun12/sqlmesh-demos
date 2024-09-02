@@ -1,32 +1,43 @@
 gateways:
     # use this for a realistic project
-    bigquery:
+    # databricks cluster verasion: 14.3 LTS (includes Apache Spark 3.5.0, Scala 2.12)
+    # python version: 3.10.13
+    databricks_demo:
         connection:
             concurrent_tasks: 24
-            register_comments: true
-            type: bigquery
-            method: service-account-json
-            keyfile_json: {{ env_var('GOOGLE_CREDENTIALS') }}
-            project: sqlmesh-demo
-        state_connection:
+            type: databricks
+            server_hostname: dbc-b9f590c4-0a08.cloud.databricks.com
+            http_path: /sql/protocolv1/o/5705746990502068/0603-211256-ns7ii2e2
+            access_token: {{ env_var('DATABRICKS_ACCESS_TOKEN') }}
+            catalog: public_demo
+        state_connection: # this will be replaced with Tobiko Cloud
             type: postgres
             host: {{ env_var('SQLMESH_STATE_HOST') }}
             port: 5432
             user: {{ env_var('SQLMESH_STATE_USERNAME') }}
             password: {{ env_var('SQLMESH_STATE_PASSWORD') }}
-            database: sqlmesh_state_demo
+            database: sqlmesh_state_databricks_demo
+        # state_connection:
+        #     type: cloud
+        #     url: https://sqlmesh-prod-enterprise-public-demo-sefz6ezt4q-uc.a.run.app
+        #     token: "{{ env_var('TOBIKO_CLOUD_TOKEN') }}"
+        test_connection:
+            type: databricks
+            server_hostname: dbc-b9f590c4-0a08.cloud.databricks.com
+            http_path: /sql/protocolv1/o/5705746990502068/0603-211256-ns7ii2e2
+            access_token: {{ env_var('DATABRICKS_ACCESS_TOKEN') }}
+            # config:
+            #   # install java (https://www.java.com/en/download/) and pyspark (pip install pyspark)
+            #   # Run Spark locally with one worker thread
+            #   "spark.master": "local"
+            #   # Move data under /tmp so that it is only temporarily persisted
+            #   "spark.sql.warehouse.dir": "/tmp/data_dir"
+            #   "spark.driver.extraJavaOptions": "-Dderby.system.home=/tmp/derby_dir"
 
-    # use this for local development and trying out SQLMesh
-    # local:
-    #     connection:
-    #         type: duckdb
-    #         database: sqlmesh-demo.db
-
-default_gateway: bigquery
+default_gateway: databricks_demo
 
 model_defaults:
-    dialect: bigquery
-
+    dialect: spark
 # enables synchronized deployments to prod when a PR is merged
 cicd_bot:
     type: github
