@@ -1,9 +1,8 @@
 MODEL (
-  name demo.incremental_demo,
+  name demo.incrementals_demo,
   kind INCREMENTAL_BY_TIME_RANGE (
     time_column transaction_date, -- How does this behave? DELETE by time range, then INSERT
     lookback 2, --How do I handle late arriving data? Handle late arriving events for the past 2 (2*1) days based on cron interval. So each time it runs, it'll process today, yesterday, and day before yesterday
-    batch_size 3
   ),
   start '2024-10-25', --This is as far back I want to care about backfilling my data
   cron '@daily', --What schedule should I run these at? Daily at Midnight UTC
