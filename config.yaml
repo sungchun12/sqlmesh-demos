@@ -1,13 +1,12 @@
 gateways:
-    # use this for a realistic project
-    # databricks cluster verasion: 14.3 LTS (includes Apache Spark 3.5.0, Scala 2.12)
     # python version: 3.10.13
     databricks_demo:
         connection:
             concurrent_tasks: 24
             type: databricks
+            force_databricks_connect: true
+            databricks_connect_use_serverless: true
             server_hostname: dbc-b9f590c4-0a08.cloud.databricks.com
-            http_path: /sql/protocolv1/o/5705746990502068/0603-211256-ns7ii2e2
             access_token: {{ env_var('DATABRICKS_ACCESS_TOKEN') }}
             catalog: public_demo
         state_connection: # this will be replaced with Tobiko Cloud
@@ -17,14 +16,12 @@ gateways:
             user: {{ env_var('SQLMESH_STATE_USERNAME') }}
             password: {{ env_var('SQLMESH_STATE_PASSWORD') }}
             database: sqlmesh_state_databricks_demo
-        # state_connection:
-        #     type: cloud
-        #     url: https://sqlmesh-prod-enterprise-public-demo-sefz6ezt4q-uc.a.run.app
-        #     token: "{{ env_var('TOBIKO_CLOUD_TOKEN') }}"
         test_connection:
             type: databricks
+            force_databricks_connect: true
+            databricks_connect_use_serverless: true
             server_hostname: dbc-b9f590c4-0a08.cloud.databricks.com
-            http_path: /sql/protocolv1/o/5705746990502068/0603-211256-ns7ii2e2
+            # http_path: /sql/protocolv1/o/5705746990502068/0603-211256-ns7ii2e2
             access_token: {{ env_var('DATABRICKS_ACCESS_TOKEN') }}
             # config:
             #   # install java (https://www.java.com/en/download/) and pyspark (pip install pyspark)
