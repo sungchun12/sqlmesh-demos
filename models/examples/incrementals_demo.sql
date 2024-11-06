@@ -44,7 +44,7 @@ SELECT
   s.transaction_id,
   s.product_id,
   s.customer_id,
-  s.transaction_amount,
+  s.transaction_amount::numeric(10, 2) as transaction_amount,
   DATE(s.transaction_timestamp) as transaction_date, -- We extract the date from the timestamp to partition by day
   DATETIME(s.transaction_timestamp, 'America/Los_Angeles') as transaction_timestamp_pst, --Convert this to PST using a SQL function
   s.payment_method,
@@ -56,7 +56,7 @@ SELECT
   p.user_segment,
   -- Derived metrics
   CASE 
-    WHEN p.usage_count > 100 AND p.feature_utilization_score > 0.8 THEN 'Power User'
+    WHEN p.usage_count > 100 AND p.feature_utilization_score > 0.6 THEN 'Power User'
     WHEN p.usage_count > 50 THEN 'Regular User'
     WHEN p.usage_count IS NULL THEN 'New User'
     ELSE 'Light User'
