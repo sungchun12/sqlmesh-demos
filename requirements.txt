@@ -1,2 +1,3 @@
-sqlmesh[web,postgres,github,bigquery]==0.130.2
+sqlmesh[web,postgres,github,bigquery]==0.132.1
 pytest==8.1.1
+# git+https://github.com/TobikoData/sqlmesh.git@jo/use_fqn_when_generating_tests

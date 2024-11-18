@@ -24,7 +24,7 @@ WITH sales_data AS (
     transaction_timestamp, --How do I account for UTC vs. PST (California baby) timestamps, do I convert them? Make sure all time columns are in UTC and then convert them to PST in the presentation layer downstream
     payment_method,
     currency
-  FROM sqlmesh-public-demo.tcloud_raw_data.sales  -- Source A
+  FROM `sqlmesh-public-demo`.`tcloud_raw_data`.`sales`  -- Source A
   WHERE transaction_timestamp BETWEEN @start_dt AND @end_dt --How do I make this run fast and only the intervals necessary (read: partitions)? Use our date macros that will automatically run the intervals necessary. And because SQLMesh manages state, it will know what needs to run each time you invoke `sqlmesh run`
 ),
 
@@ -36,7 +36,7 @@ product_usage AS (
     usage_count,
     feature_utilization_score,
     user_segment
-  FROM sqlmesh-public-demo.tcloud_raw_data.product_usage  -- Source B
+  FROM `sqlmesh-public-demo`.`tcloud_raw_data`.`product_usage`  -- Source B
   WHERE last_usage_date BETWEEN DATE_SUB(@start_dt, INTERVAL 30 DAY) AND @end_dt  -- Include recent usage data
 )
 
@@ -56,7 +56,7 @@ SELECT
   p.user_segment,
   -- Derived metrics
   CASE 
-    WHEN p.usage_count > 100 AND p.feature_utilization_score > 0.6 THEN 'Power User'
+    WHEN p.usage_count > 100 AND p.feature_utilization_score > 0.8 THEN 'Power User'
     WHEN p.usage_count > 50 THEN 'Regular User'
     WHEN p.usage_count IS NULL THEN 'New User'
     ELSE 'Light User'
