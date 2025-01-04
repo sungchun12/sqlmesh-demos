@@ -1,0 +1,71 @@
+test_incremental_demo:
+  model: '"sqlmesh-public-demo"."demo"."incremental_demo"'
+  inputs:
+    '"sqlmesh-public-demo"."tcloud_raw_data"."product_usage"':
+    - product_id: PROD-101
+      customer_id: CUST-001
+      last_usage_date: 2024-10-25 23:45:00+00:00
+      usage_count: 120
+      feature_utilization_score: 0.85
+      user_segment: enterprise
+    - product_id: PROD-103
+      customer_id: CUST-001
+      last_usage_date: 2024-10-27 12:30:00+00:00
+      usage_count: 95
+      feature_utilization_score: 0.75
+      user_segment: enterprise
+    '"sqlmesh-public-demo"."tcloud_raw_data"."sales"':
+    - transaction_id: TX-013
+      product_id: PROD-103
+      customer_id: CUST-001
+      transaction_amount: '299.990000000'
+      transaction_timestamp: 2024-10-27 08:40:00+00:00
+      payment_method: credit_card
+      currency: USD
+    - transaction_id: TX-006
+      product_id: PROD-101
+      customer_id: CUST-001
+      transaction_amount: '99.990000000'
+      transaction_timestamp: 2024-10-26 03:15:00+00:00
+      payment_method: credit_card
+      currency: USD
+    - transaction_id: TX-001
+      product_id: PROD-101
+      customer_id: CUST-001
+      transaction_amount: '99.990000000'
+      transaction_timestamp: 2024-10-25 08:30:00+00:00
+      payment_method: credit_card
+      currency: USD
+  outputs:
+    query:
+    - transaction_id: TX-006
+      product_id: PROD-101
+      customer_id: CUST-001
+      transaction_amount: 99.99
+      transaction_date: 2024-10-25
+      transaction_timestamp_pst: 2024-10-25 20:15:00
+      payment_method: credit_card
+      currency: USD
+      last_usage_date: 2024-10-25 16:45:00-07:00
+      usage_count: 120
+      feature_utilization_score: 0.85
+      user_segment: enterprise
+      user_type: Power User
+      days_since_last_usage: 0
+    - transaction_id: TX-001
+      product_id: PROD-101
+      customer_id: CUST-001
+      transaction_amount: 99.99
+      transaction_date: 2024-10-25
+      transaction_timestamp_pst: 2024-10-25 01:30:00
+      payment_method: credit_card
+      currency: USD
+      last_usage_date: 2024-10-25 16:45:00-07:00
+      usage_count: 120
+      feature_utilization_score: 0.85
+      user_segment: enterprise
+      user_type: Power User
+      days_since_last_usage: 0
+  vars:
+    start_dt: '2024-10-25'
+    end_dt: '2024-10-27'

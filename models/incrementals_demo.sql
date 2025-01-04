@@ -1,5 +1,5 @@
 MODEL (
-  name demo.incrementals_demo,
+  name demo.incremental_demo,
   kind INCREMENTAL_BY_TIME_RANGE (
     time_column transaction_date, -- How does this behave? DELETE by time range, then INSERT
     lookback 2, --How do I handle late arriving data? Handle late arriving events for the past 2 (2*1) days based on cron interval. So each time it runs, it'll process today, yesterday, and day before yesterday
@@ -56,7 +56,7 @@ SELECT
   p.user_segment,
   -- Derived metrics
   CASE 
-    WHEN p.usage_count > 100 AND p.feature_utilization_score > 0.8 THEN 'Power User'
+    WHEN p.usage_count > 50 AND p.feature_utilization_score > 0.5 THEN 'Power User'
     WHEN p.usage_count > 50 THEN 'Regular User'
     WHEN p.usage_count IS NULL THEN 'New User'
     ELSE 'Light User'
