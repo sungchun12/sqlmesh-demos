@@ -6,8 +6,8 @@ gateways:
             register_comments: true
             type: bigquery
             method: service-account-json
-            keyfile_json: {{ env_var('GOOGLE_CREDENTIALS') }}
-            project: sqlmesh-demo
+            keyfile_json: {{ env_var('GOOGLE_SQLMESH_CREDENTIALS') }}
+            project: sqlmesh-public-demo
         state_connection:
             type: postgres
             host: {{ env_var('SQLMESH_STATE_HOST') }}
@@ -26,6 +26,7 @@ default_gateway: bigquery
 
 model_defaults:
     dialect: bigquery
+    validate_query: true
 
 # enables synchronized deployments to prod when a PR is merged
 cicd_bot:
