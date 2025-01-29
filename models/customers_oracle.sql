@@ -1,27 +1,29 @@
 MODEL (
-  name demo.customers_oracle,
+  name "demo"."customers_oracle",
   cron '@daily',
-  grain customer_id,
+  -- grain customer_id,
+  dialect oracle,
 );
 
 WITH customers AS (
   SELECT
     *
-  FROM demo.stg_customers
+  FROM "demo"."stg_customers"
 ), orders AS (
   SELECT
     *
-  FROM demo.stg_orders
+  FROM "demo"."stg_orders"
 ), payments AS (
   SELECT
     *
-  FROM demo.stg_payments
+  FROM "demo"."stg_payments"
 ), customer_orders AS (
   SELECT
     customer_id,
     MIN(order_date) AS first_order,
     MAX(order_date) AS most_recent_order,
     COUNT(order_id) AS number_of_orders,
+    NVL(order_id, 0) AS order_id_nonulls, -- COALESCE(`ORDER_ID`, 0) AS `ORDER_ID_NONULLS`,  
     order_id::string AS order_id_string, -- CAST(order_id AS STRING) AS order_id_string, 
     TO_NUMBER(order_id) AS order_id_number, -- Oracle TO_NUMBER example # CAST(`orders`.`order_id` AS FLOAT64) AS `order_id_number`, 
     TO_CHAR(order_date) AS order_date_converted, -- Oracle TO_CHAR example # CAST(`orders`.`order_date` AS STRING) AS `order_date_converted`,
@@ -32,6 +34,7 @@ WITH customers AS (
     order_date_converted,
     order_id_string,
     order_id_number,
+    order_id_nonulls,
 ), customer_payments AS (
   SELECT
     orders.customer_id,
@@ -54,6 +57,7 @@ WITH customers AS (
     customer_orders.order_date_converted,
     customer_orders.order_id_number,
     customer_orders.order_id_string,
+    customer_orders.order_id_nonulls,
     customer_payments.payment_tier,
     customer_payments.total_amount AS customer_lifetime_value
   FROM customers
