@@ -2,11 +2,6 @@ MODEL (
   name demo.customers_oracle,
   cron '@daily',
   grain customer_id,
-  -- audits (UNIQUE_VALUES(columns = (
-  --   customer_id
-  -- )), NOT_NULL(columns = (
-  --   customer_id
-  -- )))
 );
 
 WITH customers AS (
@@ -29,14 +24,14 @@ WITH customers AS (
     COUNT(order_id) AS number_of_orders,
     order_id::string AS order_id_string, -- CAST(order_id AS STRING) AS order_id_string, 
     TO_NUMBER(order_id) AS order_id_number, -- Oracle TO_NUMBER example # CAST(`orders`.`order_id` AS FLOAT64) AS `order_id_number`, 
-    TO_CHAR(order_date) AS order_date_converted, -- Oracle TO_CHAR example # CAST(`orders`.`order_date` AS STRING) AS `order_date_converted`
+    TO_CHAR(order_date) AS order_date_converted, -- Oracle TO_CHAR example # CAST(`orders`.`order_date` AS STRING) AS `order_date_converted`,
   FROM orders
   GROUP BY
     customer_id,
     order_id,
     order_date_converted,
     order_id_string,
-    order_id_number
+    order_id_number,
 ), customer_payments AS (
   SELECT
     orders.customer_id,
