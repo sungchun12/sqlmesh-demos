@@ -2,7 +2,8 @@ MODEL (
   name demo.incremental_forward_only_model,
   kind INCREMENTAL_BY_TIME_RANGE (
     time_column event_date,
-    forward_only true -- All changes will be forward only
+    forward_only true, -- All changes will be forward only
+    on_destructive_change warn
   ),
   start '2020-01-01',
   cron '*/5 * * * *',
