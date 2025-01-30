@@ -72,3 +72,4 @@ WITH customers AS (
 SELECT /*+ PARALLEL(4) */
   *
 FROM final
+FETCH FIRST 10 ROWS ONLY
