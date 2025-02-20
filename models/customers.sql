@@ -15,7 +15,11 @@ WITH customers AS (
   FROM demo.stg_customers
 ), orders AS (
   SELECT
-    *
+    order_id,
+    customer_id,
+    order_date,
+    status,
+    1 as new_column
   FROM demo.stg_orders
 ), payments AS (
   SELECT
