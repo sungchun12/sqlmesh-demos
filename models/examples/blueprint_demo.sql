@@ -28,6 +28,7 @@ SELECT
   purchase_amount,
   purchase_date,
   country,
-  @{paid_field} as customer_persona -- for specific customers, I can add columns if they pay for extra analytics
+  --for specific customers, I can add columns if they pay for extra analytics
+  @{paid_field} as customer_persona -- use `@{variable}` syntax to make sqlmesh interpret the variable as a column
 FROM demo.seed_ecommerce
 where customer_id = CAST(@customer_filter AS INT64) -- we do `WHERE @condition` vs. `FROM @condition` to repsect the AST
