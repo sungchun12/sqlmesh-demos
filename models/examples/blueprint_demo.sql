@@ -9,7 +9,7 @@ MODEL (
     (customer := customer4, paid_field := "pay to see", customer_filter := 4),
     (customer := customer5, paid_field := customer_persona, customer_filter := 5)
   ),
-  enabled true,
+  -- enabled @IF(@customer in ('customer4', 'customer5'), false, true),
   audits (
     unique_combination_of_columns(columns := (
       customer_id, order_id
