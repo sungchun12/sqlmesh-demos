@@ -26,6 +26,7 @@ default_gateway: bigquery
 
 model_defaults:
     dialect: bigquery
+    start: 2025-01-01
 
 # enables synchronized deployments to prod when a PR is merged
 cicd_bot:
