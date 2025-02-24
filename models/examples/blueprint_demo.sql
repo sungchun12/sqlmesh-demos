@@ -3,11 +3,11 @@ MODEL (
   kind VIEW,
   cron '@daily',
   blueprints (
-    (customer := customer1, field_a := x, field_b := y, where_clause := "where customer_id = 1"),
-    (customer := customer2, field_a := z, field_b := w, where_clause := "where customer_id = 2"),
-    (customer := customer3, field_a := a, field_b := b, where_clause := "where customer_id = 3"),
-    (customer := customer4, field_a := c, field_b := d, where_clause := "where customer_id = 4"),
-    (customer := customer5, field_a := e, field_b := f, where_clause := "where customer_id = 5")
+    (customer := customer1, paid_field := customer_persona, customer_filter := 1), -- each variable is a string
+    (customer := customer2, paid_field := "pay to see", customer_filter := 2),
+    (customer := customer3, paid_field := customer_persona, customer_filter := 3),
+    (customer := customer4, paid_field := "pay to see", customer_filter := 4),
+    (customer := customer5, paid_field := customer_persona, customer_filter := 5)
   ),
   enabled true,
   audits (
@@ -28,7 +28,7 @@ SELECT
   purchase_amount,
   purchase_date,
   country,
-  -- for specific customers, I can add columns if they pay for extra analytics
-  -- if paid_analytics is true, then add that column, otherwise don't
+  @{paid_field} as customer_persona -- for specific customers, I can add columns if they pay for extra analytics
 FROM demo.seed_ecommerce
-@where_clause
+where true
+and customer_id = CAST(@customer_filter AS INT64)
