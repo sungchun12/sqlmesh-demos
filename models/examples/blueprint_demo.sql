@@ -30,5 +30,4 @@ SELECT
   country,
   @{paid_field} as customer_persona -- for specific customers, I can add columns if they pay for extra analytics
 FROM demo.seed_ecommerce
-where true
-and customer_id = CAST(@customer_filter AS INT64)
+where customer_id = CAST(@customer_filter AS INT64) -- we do `WHERE @condition` vs. `FROM @condition` to repsect the AST
