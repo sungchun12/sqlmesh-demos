@@ -3,12 +3,12 @@ MODEL (
   kind SCD_TYPE_2_BY_TIME (
     unique_key id,
     updated_at_name event_date
-  )
+  ),
+  enabled false
 );
 
 SELECT
-  id::INT,
-  item_id::INT,
+  id::INT64,
+  item_id::INT64,
   event_date::DATE
-FROM
-  demo.seed_model
+FROM demo.seed_model
