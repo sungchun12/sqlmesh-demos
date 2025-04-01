@@ -6,7 +6,7 @@ gateways:
             register_comments: true
             type: bigquery
             method: service-account-json
-            keyfile_json: {{ env_var('GOOGLE_SQLMESH_CREDENTIALS') }}
+            keyfile_json: {{ env_var('GOOGLE_SQLMESH_CREDENTIALS', 'default') }}
             project: sqlmesh-public-demo
         state_connection:
             type: postgres
@@ -17,16 +17,31 @@ gateways:
             database: sqlmesh_state_demo
 
     # use this for local development and trying out SQLMesh
-    # local:
-    #     connection:
-    #         type: duckdb
-    #         database: sqlmesh-demo.db
-
+    duckdb:
+        connection:
+            type: duckdb
+            database: sqlmesh-demo.db
+        state_connection:
+              type: postgres
+              host: {{ env_var('SQLMESH_STATE_HOST') }}
+              port: 5432
+              user: {{ env_var('SQLMESH_STATE_USERNAME') }}
+              password: {{ env_var('SQLMESH_STATE_PASSWORD') }}
+              database: sqlmesh_state_demo
 default_gateway: bigquery
 
 model_defaults:
     dialect: bigquery
     start: 2025-01-01
+
+
+linter:
+    enabled: true
+    # error if ["ambiguousorinvalidcolumn", "invalidselectstarexpansion"] rules violated
+    rules: ["ambiguousorinvalidcolumn", "invalidselectstarexpansion"]
+    # warn_rules: ["noselectstar"]
+    # warn_rules: ["nomissingaudits","nomissingowner"]
+    # ignored_rules: ["noselectstar"]
 
 # enables synchronized deployments to prod when a PR is merged
 cicd_bot:

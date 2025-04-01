@@ -44,5 +44,14 @@ WITH orders AS (
     ON orders.order_id = order_payments.order_id
 )
 SELECT
-  *
+  surrogate_key,
+  order_id,
+  customer_id,
+  order_date,
+  status,
+  credit_card_amount,
+  coupon_amount,
+  bank_transfer_amount,
+  gift_card_amount,
+  amount
 FROM final

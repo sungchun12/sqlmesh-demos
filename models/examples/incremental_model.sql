@@ -6,7 +6,8 @@ MODEL (
   start '2020-01-01',
   cron '@daily',
   grain (id, event_date),
-  stamp 'fix hydration issue'
+  stamp 'fix hydration issue',
+  owner 'sung'
 );
 
 SELECT

@@ -19,7 +19,10 @@ WITH customers AS (
   FROM demo.stg_orders
 ), payments AS (
   SELECT
-    *
+    payment_id,
+    order_id,
+    payment_method,
+    amount,
   FROM demo.stg_payments
 ), customer_orders AS (
   SELECT
@@ -57,8 +60,3 @@ WITH customers AS (
 SELECT
   *
 FROM final
-
--- create a unit test from this SQL model
--- sqlmesh create_test demo.customers --query demo.stg_customers "select * from demo.stg_customers limit 5" \
--- --query demo.stg_orders "select * from demo.stg_orders limit 5" \
--- --query demo.stg_payments "select * from demo.stg_payments limit 5"
