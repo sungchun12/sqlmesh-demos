@@ -1,10 +1,10 @@
 MODEL (
   name customer1.custom,
   kind VIEW,
-  cron '@daily',
+  cron '@daily'
 );
 
 SELECT
   customer_persona,
-  'custom analytics' as custom_analytics
+  'custom analytics' AS custom_analytics
 FROM customer1.orders

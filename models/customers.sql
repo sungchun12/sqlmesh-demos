@@ -2,11 +2,14 @@ MODEL (
   name demo.customers,
   cron '@daily',
   grain customer_id,
-  audits (UNIQUE_VALUES(columns = (
-    customer_id
-  )), NOT_NULL(columns = (
-    customer_id
-  )))
+  audits (
+    UNIQUE_VALUES(columns = (
+      customer_id
+    )),
+    NOT_NULL(columns = (
+      customer_id
+    ))
+  )
 );
 
 WITH customers AS (
@@ -22,7 +25,7 @@ WITH customers AS (
     payment_id,
     order_id,
     payment_method,
-    amount,
+    amount
   FROM demo.stg_payments
 ), customer_orders AS (
   SELECT

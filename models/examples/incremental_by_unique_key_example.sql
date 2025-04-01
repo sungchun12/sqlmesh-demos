@@ -4,7 +4,7 @@ MODEL (
     unique_key id
   ),
   start '2020-01-01',
-  cron '@daily',
+  cron '@daily'
 );
 
 SELECT
