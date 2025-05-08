@@ -12,7 +12,7 @@ MODEL (
 SELECT
   item_id,
   COUNT(DISTINCT id) AS num_orders,
-  current_timestamp as updated_at
+  current_timestamp as updated_at_v3
 FROM demo.incremental_model
 GROUP BY
   item_id

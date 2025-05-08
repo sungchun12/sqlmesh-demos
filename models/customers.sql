@@ -1,7 +1,7 @@
 MODEL (
   name demo.customers,
   cron '@daily',
-  grain customer_id,
+  grain first_name,
   audits (
     UNIQUE_VALUES(columns = (
       customer_id
@@ -14,7 +14,9 @@ MODEL (
 
 WITH customers AS (
   SELECT
-    *
+    customer_id,
+    first_name,
+    last_name
   FROM demo.stg_customers
 ), orders AS (
   SELECT
@@ -63,3 +65,4 @@ WITH customers AS (
 SELECT
   *
 FROM final
+limit 10

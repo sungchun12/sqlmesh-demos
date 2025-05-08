@@ -13,7 +13,8 @@ MODEL (
 SELECT
   id,
   item_id,
-  event_date
+  event_date,
+  2 AS new_column
 FROM demo.seed_model
 WHERE
   event_date BETWEEN @start_date AND @end_date
